@@ -1,4 +1,4 @@
-<p>This download contains compiled files for both Windows and Linux, and you can use the source code to compile it yourself for Mac or unsupported Nuke versions!</p>
+<p>This project contains compiled files for both Windows and Linux, and you can use the source code to compile it yourself for Mac or unsupported Nuke versions!</p>
 <p> </p>
 <p> </p>
 <p> </p>
