@@ -1,0 +1,307 @@
+Gizmo {
+ inputs 3
+ addUserKnob {20 PixelSort_tab l PixelSort}
+ addUserKnob {41 channels T PixelSortCore.channels}
+ addUserKnob {26 ""}
+ addUserKnob {6 useSort l "use sort input" t "Use the alpha channel of the 'sort' input to determine the sorting order of the input image, instead of the luminance of the rgb in the 'img' input." +STARTLINE}
+ addUserKnob {26 ""}
+ addUserKnob {41 threshold t "Skip sorting by 'sort' input alpha channel at this value threshold." T PixelSortCore.threshold}
+ addUserKnob {7 rotate t "Rotate the sorting direction." R -180 180}
+ addUserKnob {4 filterForwards l "filter forwards" t "Before sorting, the image is rotated and resized. Afterwards, these transformations are reversed. The filtering can be set for both of these operations." M {Impulse Cubic Keys Simon Rifman Mitchell Parzen Notch Lanczos4 Lanczos6 Sinc4 "" "" ""}}
+ filterForwards Cubic
+ addUserKnob {4 filterBackwards l backwards t "Before sorting, the image is rotated and resized. Afterwards, these transformations are reversed. The filtering can be set for both of these operations." -STARTLINE M {Impulse Cubic Keys Simon Rifman Mitchell Parzen Notch Lanczos4 Lanczos6 Sinc4 "" ""}}
+ filterBackwards Cubic
+ addUserKnob {26 ""}
+ addUserKnob {7 reformatSort l proxy t "Reduce the sorting quality for faster playback (useful when doing live RotoPaint in the 'sort' input, for instance)" R 0.1 1}
+ reformatSort 1
+ addUserKnob {26 ""}
+ addUserKnob {41 maskChannelMask l "" +STARTLINE T Dissolve1.maskChannelMask}
+ addUserKnob {41 maskChannelInput l "" -STARTLINE T Dissolve1.maskChannelInput}
+ addUserKnob {41 inject -STARTLINE T Dissolve1.inject}
+ addUserKnob {41 invert_mask l invert -STARTLINE T Dissolve1.invert_mask}
+ addUserKnob {41 fringe -STARTLINE T Dissolve1.fringe}
+ addUserKnob {26 ""}
+ addUserKnob {26 Me l "" +STARTLINE T "Max van Leeuwen"}
+ addUserKnob {26 Version l "" +STARTLINE T "PixelSort 1.6"}
+ addUserKnob {26 Website l "" +STARTLINE T "<a href=\"https://www.maxvanleeuwen.com/pixelsort\"><font color=\"#b2b2b2\">maxvanleeuwen.com/pixelsort</font></a>"}
+}
+ BackdropNode {
+  inputs 0
+  name BackdropNode1
+  tile_color 0x4c4c4cff
+  label rotate
+  note_font_size 42
+  xpos 216
+  ypos -24
+  bdwidth 469
+  bdheight 162
+ }
+ BackdropNode {
+  inputs 0
+  name BackdropNode2
+  tile_color 0x4c4c4cff
+  label "reformat to rotation"
+  note_font_size 42
+  xpos 218
+  ypos 219
+  bdwidth 472
+  bdheight 146
+ }
+ BackdropNode {
+  inputs 0
+  name BackdropNode3
+  tile_color 0x4c4c4cff
+  label proxy
+  note_font_size 42
+  xpos 219
+  ypos 377
+  bdwidth 474
+  bdheight 118
+ }
+ BackdropNode {
+  inputs 0
+  name BackdropNode4
+  tile_color 0x4c4c4cff
+  label "set sort input"
+  note_font_size 42
+  xpos 360
+  ypos -533
+  bdwidth 313
+  bdheight 422
+ }
+ Input {
+  inputs 0
+  name mask
+  xpos 793
+  ypos -951
+  number 2
+ }
+ Dot {
+  name Dot8
+  xpos 827
+  ypos 1499
+ }
+ Input {
+  inputs 0
+  name img
+  xpos 284
+  ypos -945
+ }
+ Grade {
+  channels none
+  black_clamp false
+  name break_concatenation1
+  tile_color 0x3000ff
+  xpos 284
+  ypos -808
+ }
+ Crop {
+  box {0 0 {width} {height}}
+  crop false
+  name CropToImg1
+  xpos 284
+  ypos -770
+ }
+ Dot {
+  name Dot3
+  xpos 318
+  ypos -435
+ }
+set N4f81f800 [stack 0]
+ Dot {
+  name Dot6
+  xpos 443
+  ypos -435
+ }
+ Keyer {
+  operation "luminance key"
+  name Keyer1
+  xpos 409
+  ypos -354
+ }
+ Dot {
+  name Dot4
+  xpos 443
+  ypos -261
+ }
+ Input {
+  inputs 0
+  name sort
+  xpos 539
+  ypos -946
+  number 1
+ }
+ Grade {
+  channels none
+  black_clamp false
+  name break_concatenation2
+  tile_color 0x3000ff
+  xpos 539
+  ypos -809
+ }
+ Crop {
+  box {0 0 {width} {height}}
+  crop false
+  name CropToImg3
+  xpos 539
+  ypos -771
+ }
+ Switch {
+  inputs 2
+  which {{!parent.useSort}}
+  name LuminanceSwtich
+  xpos 539
+  ypos -265
+ }
+ Remove {
+  operation keep
+  channels alpha
+  name Remove1
+  xpos 539
+  ypos -187
+ }
+ Transform {
+  rotate {{Rotation_Fw.rotate}}
+  center {{Rotation_Fw.center.x} {Rotation_Fw.center.y}}
+  black_outside false
+  name Rotation_Fw2
+  xpos 539
+  ypos 58
+ }
+ Reformat {
+  type "to box"
+  box_width {{bbox.w}}
+  box_height {{bbox.h}}
+  resize none
+  name FormatToRotation3
+  xpos 539
+  ypos 307
+ }
+ Reformat {
+  type scale
+  scale {{parent.reformatSort}}
+  name Proxy3
+  xpos 539
+  ypos 446
+  disable {{"scale == 1"}}
+ }
+ Dot {
+  name Dot2
+  xpos 573
+  ypos 761
+ }
+push $N4f81f800
+ Transform {
+  rotate {{"parent.rotate + 90"}}
+  center {{"width / 2"} {"height / 2"}}
+  black_outside false
+  name Rotation_Fw
+  xpos 284
+  ypos 55
+ }
+ Reformat {
+  type "to box"
+  box_width {{bbox.w}}
+  box_height {{bbox.h}}
+  resize none
+  name FormatToRotation
+  xpos 284
+  ypos 305
+ }
+ Reformat {
+  type scale
+  scale {{parent.reformatSort}}
+  name Proxy2
+  xpos 284
+  ypos 449
+  disable {{"scale == 1"}}
+ }
+ Transform {
+  filter {{filterForwards}}
+  black_outside false
+  name FILTERING_CONCATENATED1
+  tile_color 0x2f00ff
+  xpos 284
+  ypos 603
+ }
+ PixelSortCore {
+  inputs 2
+  channels rgb
+  threshold 0.1
+  name PixelSortCore
+  xpos 284
+  ypos 757
+ }
+ Reformat {
+  type scale
+  scale {{1/parent.reformatSort}}
+  name UndoProxy1
+  xpos 284
+  ypos 965
+  disable {{"scale == 1"}}
+ }
+ Transform {
+  rotate {{-parent.Rotation_Fw.rotate}}
+  center {{"width / 2"} {"height / 2"}}
+  black_outside false
+  name RotateBack
+  xpos 284
+  ypos 1042
+ }
+ Reformat {
+  type "to box"
+  box_width {{Rotation_Fw.center.x*2}}
+  box_height {{Rotation_Fw.center.y*2}}
+  resize none
+  name FormatToRotation1
+  xpos 284
+  ypos 1068
+ }
+ Transform {
+  center {320 240}
+  filter {{filterBackwards}}
+  black_outside false
+  name FILTERING_CONCATENATED2
+  tile_color 0x2f00ff
+  xpos 284
+  ypos 1249
+ }
+ Crop {
+  box {0 0 {width} {height}}
+  crop false
+  name CropToImg2
+  xpos 284
+  ypos 1402
+ }
+push $N4f81f800
+ Dot {
+  name Dot7
+  xpos 174
+  ypos -435
+ }
+ Dot {
+  name Dot5
+  xpos 174
+  ypos 1499
+ }
+ Dissolve {
+  inputs 2+1
+  which 1
+  name Dissolve1
+  xpos 284
+  ypos 1489
+ }
+ Output {
+  name Output1
+  xpos 284
+  ypos 1678
+ }
+ StickyNote {
+  inputs 0
+  name StickyNote1
+  label "<left>(memo) filtering linked to parent pulldown choice knob, using python:\n\n\npixelsort = nuke.toNode('PixelSort')\npixelsort.begin()\n\nk = nuke.toNode('FILTERING_CONCATENATED1')\['filter']\nk.setExpression('rotationFilter',0)"
+  note_font Verdana
+  xpos 393
+  ypos 1205
+ }
+end_group
