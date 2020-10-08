@@ -1,4 +1,11 @@
-<p>This project contains compiled files for both Windows and Linux, and you can use the source code to compile it yourself for Mac or unsupported Nuke versions!</p>
+<p><span style="font-size: 18pt;"></span><span style="font-size: 24pt;">Deprecated - <br />see <a href="https://github.com/max-van-leeuwen/Nuke-Blink-PixelSort" target="_blank">this PixelSort blinkscript project</a> instead!<br />It's and updated version that works with newer Nuke versions and is easier to use.</span></p>
+<p> </p>
+<p>Link to updated Pixelsort gizmo: <a href="http://www.nukepedia.com/blink/filter/pixelsort">http://www.nukepedia.com/blink/filter/pixelsort<br /></a>I am leaving this post online for those who want to use it in older Nuke versions.<a href="http://www.nukepedia.com/blink/filter/pixelsort"></a></p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
 <p> </p>
 <p> </p>
 <p> </p>
@@ -25,7 +32,8 @@
 <p> </p>
 <p>See my website (<a href="https://maxvanleeuwen.com/pixelsort">maxvanleeuwen.com/pixelsort</a>) for more information and examples!</p>
 <p>Currently, PixelSort is compiled for the following systems:<br />Windows: 11.0, 11.1, 11.2, 11.3<br />Linux: 8.0, 9.0, 10.0, 10.5, 11.0, 11.1, 11.2, 11.3.</p>
-<p><br />Once compiled, place the resulting file in the PixelSort folder, in a subfolder with the name of the version you compiled it for (in the same fashion as the other ones that are already there). The menu.py will automatically find it!</p>
+<p>Thanks to Idris Miles for his help with compiling for Linux!</p>
+<p><br />Once compiled, place the resulting file in the PixelSort folder, in a subfolder with the name of the version you compiled it for (in the same fashion as the other ones that are already there), and the menu.py will automatically find it!</p>
 <p> </p>
 <p> </p>
 <p> </p>
@@ -42,7 +50,7 @@
 <p> </p>
 <p><strong>Installation using NukeShared</strong></p>
 <p> </p>
-<p>1. Place the PixelSort folder in the '_AutoInstaller' repository.</p>
+<p>1. Place the PixelSort folder in the ‘_AutoInstaller’ repository.</p>
 <p> </p>
 <p>NukeShared is a way of installing plugins by dragging/dropping them in folders, see <a href="https://maxvanleeuwen.com/nukeshared" target="_blank">my website</a> (maxvanleeuwen.com/nukeshared) for more information.</p>
 <p> </p>
