@@ -1,4 +1,4 @@
-<p><span style="font-size: 18pt;"></span><span style="font-size: 24pt;">Deprecated - <br />see <a href="https://github.com/max-van-leeuwen/Nuke-Blink-PixelSort" target="_blank">this PixelSort blinkscript project</a> instead!<br />It's and updated version that works with newer Nuke versions and is easier to use.</span></p>
+<p><span style="font-size: 18pt;"></span><span style="font-size: 24pt;">Deprecated - <br />see <a href="https://github.com/max-van-leeuwen/Nuke-Blink-PixelSort" target="_blank">this PixelSort blinkscript project</a> instead!<br />It's an updated version that works with newer Nuke versions and is easier to use.</span></p>
 <p> </p>
 <p>Link to updated Pixelsort gizmo: <a href="http://www.nukepedia.com/blink/filter/pixelsort">http://www.nukepedia.com/blink/filter/pixelsort<br /></a>I am leaving this post online for those who want to use it in older Nuke versions.<a href="http://www.nukepedia.com/blink/filter/pixelsort"></a></p>
 <p> </p>
